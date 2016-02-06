@@ -86,7 +86,7 @@ page_jinja_template = """
                 {% if (user['has_public_html'] or user['has_public_git']) %}
                 <tr>
                     <td>
-                        <img class='user-avatar' src='grey.jpg' alt='Avatar for {{username}}' data-src='http://cdn.libravatar.org/avatar/{{user.email_hash}}'>
+                        <img class='user-avatar' src='grey.jpg' alt='Avatar for {{username}}' data-src='https://seccdn.libravatar.org/avatar/{{user.email_hash}}?s=20'>
                         {{user.name.strip()}} <span class='text-muted'>({{username}})</span>
                     </td>
 
@@ -100,9 +100,12 @@ page_jinja_template = """
 
                         {% if user['has_public_html'] %}
                         <div>
-                            <a href="https://{{username}}.fedorapeople.org">{{username}}'s Homepage</a>
+                            <a href="https://{{username}}.fedorapeople.org">{{username}}'s homepage</a>
                         </div>
                         {% endif %}
+                        <div>
+                            <a href="https://fedoraproject.org/wiki/user:{{username}}">{{username}}'s wiki page</a>
+                        </div>
                     </td>
                 </tr>
                 {% endif %}
