@@ -153,7 +153,7 @@ page_jinja_template = """
 """
 
 # Fedora people users separated by newlines
-users_list = subprocess.check_output("getent passwd | sort | cut -d: -f1,6 | grep /home", shell=True) # | grep /home/fedora/ ")
+users_list = subprocess.check_output("getent passwd | sort | cut -d: -f1,6 | grep /home/fedora/", shell=True)
 
 # Fedora people users array with a subarray for each user containing [username, homedir]
 users_list_array = [a.split(':') for a in users_list.split('\n')][:-1]
