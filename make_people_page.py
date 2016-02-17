@@ -86,7 +86,7 @@ page_jinja_template = """
                 {% if (user['has_public_html'] or user['has_public_git']) %}
                 <tr>
                     <td>
-                        <img class='user-avatar' src='grey.jpg' alt='Avatar for {{username}}' data-src='https://seccdn.libravatar.org/avatar/{{user.email_hash}}?s=20'>
+                        <img class='user-avatar' src='grey.jpg' alt='Avatar for {{username}}' data-src='https://seccdn.libravatar.org/avatar/{{user.openid_hash}}?s=20&d=retro'>
                         {{user.name.strip()}} <span class='text-muted'>({{username}})</span>
                     </td>
 
@@ -184,8 +184,9 @@ for user in users_list_array:
     users[username]['has_public_git'] = has_public_git
 
     user_fedora_email = '{}@fedoraproject.org'.format(username).encode('utf-8')
-
+    user_fedora_openid = 'http://{}.id.fedoraproject.org/'.format(username).encode('utf-8')
     users[username]['email_hash'] = hashlib.md5(user_fedora_email.strip().lower()).hexdigest()
+    users[username]['openid_hash'] = hashlib.sha256(user_fedora_openid.strip().lower()).hexdigest()
 
 page_jinja_template_obj = Template(page_jinja_template)
 page_output = page_jinja_template_obj.render(users=sorted(users.items()))
