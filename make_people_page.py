@@ -24,8 +24,9 @@ page_jinja_template = """
 <html>
 <head>
     <title>Fedora People</title>
-    <link rel='stylesheet' href='datatables.min.css'>
+    <link rel='stylesheet' href='/static/datatables.min.css'>
     <link rel='stylesheet' href='//getfedora.org/static/css/bootstrap-theme.css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style>
         .center {
@@ -34,21 +35,6 @@ page_jinja_template = """
 
         footer {
             margin-bottom: 45px;
-        }
-
-
-        .searchresults tr[visible='false'],
-        .no-result {
-          display:none;
-        }
-
-        .searchresults tr[visible='true'] {
-          display:table-row;
-        }
-
-        .counter {
-          padding:8px;
-          color:#ccc;
         }
 
         .user-avatar {
@@ -70,9 +56,7 @@ page_jinja_template = """
             <a target='_blank' href='//fedoraproject.org/wiki/Infrastructure/fedorapeople.org'>FAQ</a> on using your public space.
         </p>
 
-        <span class="counter pull-right"></span>
-
-        <table class='table table-hover searchresults' id='peopleTable' >
+        <table class='table table-hover' id='peopleTable' >
             <thead>
                 <tr>
                     <th>Name</th>
@@ -86,7 +70,7 @@ page_jinja_template = """
                 {% if (user['has_public_html'] or user['has_public_git']) %}
                 <tr>
                     <td>
-                        <img class='user-avatar' src='grey.jpg' alt='Avatar for {{username}}' data-src='https://seccdn.libravatar.org/avatar/{{user.openid_hash}}?s=20&d=retro'>
+                        <img class='user-avatar' src='/static/grey.jpg' alt='Avatar for {{username}}' data-src='https://seccdn.libravatar.org/avatar/{{user['openid_hash']}}?s=20&d=retro'>
                         {{user.name.strip()}} <span class='text-muted'>({{username}})</span>
                     </td>
 
@@ -110,9 +94,6 @@ page_jinja_template = """
                 </tr>
                 {% endif %}
             {% endfor %}
-            <!-- <tr class="warning no-result">
-                <td colspan="10"><i class="fa fa-warning"></i> No results</td>
-            </tr> -->
         </tbody>
     </table>
     </div>
@@ -130,8 +111,8 @@ page_jinja_template = """
             <a href="http://fedoraproject.org/wiki/Legal:Main">Legal</a> &middot; <a href="http://fedoraproject.org/wiki/Legal:Trademark_guidelines">Trademark Guidelines</a>
     </footer>
 
-    <script src='jquery.dataTables.min.js'></script>
-    <script src='jquery.unveil.js'></script>
+    <script src='/static/jquery.dataTables.min.js'></script>
+    <script src='/static/jquery.unveil.js'></script>
 
 
     <script>
@@ -146,8 +127,6 @@ page_jinja_template = """
                 /* on each table draw */
                 $('img').unveil();
             });
-
-
         });
     </script>
 
